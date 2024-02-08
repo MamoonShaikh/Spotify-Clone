@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="icon" sizes="32x32" type="image/png"
+        href="https://open.spotifycdn.com/cdn/images/favicon32.b64ecc03.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utillity.css">
+</head>
+
+<body>
+    <div class="container flex">
+        <div class="left  bg-black">
+            <div class="close">
+                <img class="invert" src="./Assets/close.svg" alt="">
+            </div>
+            <div class="home bg-gray rounded m1 p-1">
+                <div class="logo">
+                    <img width="100" class="invert" src="./Assets/logo.svg" alt="">
+                </div>
+                <ul>
+                    <li><img class="invert" src="./Assets/home.svg" alt="Home">Home</li>
+                    <li> <img class="invert" src="./Assets/search.svg" alt="Search">Search</li>
+                </ul>
+            </div>
+            <div class="library bg-gray  rounded m1 p-1">
+                <div class="heading">
+                    <img class="invert" src="./Assets/playlist.svg" alt="">
+                    <h3>Your Library</h3>
+                </div>
+                <div class="songlist">
+                    <ul>
+
+                    </ul>
+                </div>
+                <div class="footer">
+                    <div><a href="https://www.spotify.com/in-en/legal/"><span>Legal</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/privacy/"><span>Privacy Center</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/legal/privacy-policy/"><span>Privacy Policy</span></a>
+                    </div>
+                    <div><a href="https://www.spotify.com/in-en/legal/cookies-policy/"><span>Cookies</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3"><span>About Ads</span></a>
+                    </div>
+                    <div><a href="https://www.spotify.com/in-en/accessibility/"><span>Accessibility</span></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="right bg-gray  rounded  ">
+            <div class="header">
+                <div class="nav">
+                    <div class="hamburgercontainer">
+                        <img class="invert hamburger" src="./Assets/hamburger.svg" alt="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            class="injected-svg" data-src="/icons/arrow-left-01-stroke-rounded.svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                            <path d="M15 6C15 6 9.00001 10.4189 9 12C8.99999 13.5812 15 18 15 18" stroke="#ffffff"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            class="injected-svg" data-src="/icons/arrow-right-01-stroke-rounded.svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" role="img" color="#000000">
+                            <path d="M9.00005 6C9.00005 6 15 10.4189 15 12C15 13.5812 9 18 9 18" stroke="#ffffff"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="signupbtn">Sign up</button>
+                    <button class="loginbtn">Log in</button>
+                </div>
+            </div>
+            <div class="spotifypPlaylist">
+                <h1>spotify Playlist</h1>
+                <div class="cardCantainer">
+                    <div class="card">
+                        <div class="play">
+                            <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                viewBox="0 0 40 40" fill="none" xmlns:xlink="http://www.w3.org/1999/xlink" role="img"
+                                color="#000000">
+                                <circle cx="20" cy="20" r="18" fill="#1fdf64"></circle>
+                                <polygon points="15,26 15,14 26,20" fill="#000"></polygon>
+                            </svg>
+                        </div>
+                        <img src="https://i.scdn.co/image/ab67706f0000000287b494983f83013197bdb4eb" alt="">
+                        <h2>Dinner & Chill</h2>
+                        <p>Gentle Indie songs for a relaxed dinner.</p>
+                    </div>
+                    <div class="card">
+                        <img src="./Img/mm1.jpg" alt="">
+                        <h2>Dinner & Chill</h2>
+                        <p>Gentle Indie songs for a relaxed dinner.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="playbar">
+                <div class="seekbar">
+                    <div class="circle"></div>
+                </div>
+                <div class="abovebar">
+                <div class="songinfo"></div>
+                    <div class="songbtn">
+                        <img width="30" id="previous" src="./Assets/previous.svg" alt="">
+                        <img width="30" id="play" src="./Assets/pause.svg" alt="">
+                        <img width="30" id="next" src="./Assets/next.svg" alt="">
+                    </div>
+
+                    <div class="songtime"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
