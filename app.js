@@ -1,5 +1,6 @@
 let currentSong = new Audio();
 let songs;
+let currfolder;
 
 // Function to convert seconds to "mm:ss" format
 function secondsToMinutesSecond(seconds) {
@@ -14,59 +15,81 @@ function secondsToMinutesSecond(seconds) {
 }
 
 
-async function getSongs() {
-    let a = await fetch("http://127.0.0.1:5501/Project/Project-3/Songs");
+async function getSongs(folder) {
+    currfolder =folder
+    let a = await fetch(`http://127.0.0.1:5501/Project/Spotify-Clone/${folder}`);
     let response = await a.text();
     console.log(response);
     let div = document.createElement("div");
     div.innerHTML = response;
     let as = div.getElementsByTagName("a");
-    let songs = [];
+   songs = [];
     for (let index = 0; index < as.length; index++) {
         const element = as[index];
         if (element.href.endsWith(".mp3")) {
-            songs.push(element.href.split("/Songs/")[1]);
+            songs.push(element.href.split(`/${folder}/`)[1]);
 
         }
     }
-    return songs;
+
+      //show all the songs  in playlist
+      let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+      songul.innerHTML =""
+      for (const song of songs) {
+          songul.innerHTML = songul.innerHTML + `<li>
+        <img class="invert" src="./Assets/music.svg" alt="">
+        <div class="info">
+            <div>${song.replaceAll("%20", " ")}</div>
+            <div>Song Artist</div>
+        </div>
+        <div class="playnow">
+            <span>Play Now</span>
+            <img class="invert" src="./Assets/play.svg" alt="">
+        </div></li>`;
+      }
+      //Attach an event listener to each song
+      Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
+          e.addEventListener("click", element => {
+              console.log(e.querySelector(".info").firstElementChild.innerHTML)
+              palyMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+  
+          })
+      });
+   
 }
-const palyMusic = (track) => {
-    let audio = new Audio("./Songs/" + track)
-    currentSong.src = "./Songs/" + track;
+const palyMusic = (track,pause=false) => {
+    // let audio = new Audio("./Songs/" + track)
+    currentSong.src =  `./${currfolder}/` + track;
+    if(!pause){
     currentSong.play()
     play.src = "./Assets/pause.svg"
+}
     document.querySelector(".songinfo").innerHTML = track
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+
+   
+}
+async function displayAlbums(){
+    let a = await fetch(`http://127.0.0.1:5501/Project/Spotify-Clone/songs`)
+    let response = await a.text();
+    let div = document.getElementsByTagName("a")
+    let folder = []
+    Array.from(anchors).forEach(e=>{
+        if(e.href.include("/songs")){
+
+        }
+    })
 }
 
 async function main() {
 
     // Get the list of all the songs
-    songs = await getSongs();
+     await getSongs("songs/ncs");
+    palyMusic(songs[0],true)
 
-    //show all the songs  in playlist
-    let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0];
-    for (const song of songs) {
-        songul.innerHTML = songul.innerHTML + `<li>
-      <img class="invert" src="./Assets/music.svg" alt="">
-      <div class="info">
-          <div>${song.replaceAll("%20", " ")}</div>
-          <div>Song Artist</div>
-      </div>
-      <div class="playnow">
-          <span>Play Now</span>
-          <img class="invert" src="./Assets/play.svg" alt="">
-      </div></li>`;
-    }
-    //Attach an event listener to each song
-    Array.from(document.querySelector(".songlist").getElementsByTagName("li")).forEach(e => {
-        e.addEventListener("click", element => {
-            console.log(e.querySelector(".info").firstElementChild.innerHTML)
-            palyMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
-
-        })
-    });
+    // Display all the albums on the page
+    displayAlbums()
+   
     //Attach an event listener to play and previous
     play.addEventListener("click", () => {
         if (currentSong.paused) {
@@ -118,6 +141,15 @@ async function main() {
         if ((index + 1) < songs.length) {
             palyMusic(songs[index + 1])
         }
+    })
+
+    // Load the playlist whenever card is clicked
+   Array.from (document.getElementsByClassName("card")).forEach(e=>{
+        e.addEventListener("click", async item=>{
+            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);
+            
+        })
+
     })
 
 
